@@ -35,13 +35,19 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
+    
+    //GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
-
+  //GET BY Email
+    @GetMapping("/email/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        return ResponseEntity.ok(user);
+    }
     // UPDATE
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id,
