@@ -3,6 +3,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.UserRequest;
+import com.example.demo.dto.UserResponse;
 import com.example.demo.entity.User;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.repository.UserRepository;
@@ -18,8 +20,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public UserResponse createUser(UserRequest request) {
+
+        User user = new User();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setAge(request.getAge());
+        User savedUser = userRepository.save(user);
+
+        return mapToResponse(savedUser);
+    }
+    private UserResponse mapToResponse(User user) {
+        UserResponse response = new UserResponse();
+        response.setId(user.getId());
+        response.setName(user.getName());
+        response.setEmail(user.getEmail());
+        response.setAge(user.getAge());
+        return response;
     }
  
     @Override
