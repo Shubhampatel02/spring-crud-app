@@ -48,8 +48,8 @@ public class UserController {
     }
   //GET BY Email
     @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        User user = userService.getUserByEmail(email);
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
+        UserResponse user = userService.getUserByEmail(email);
         return ResponseEntity.ok(user);
     }
     // UPDATE

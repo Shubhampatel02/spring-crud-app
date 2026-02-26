@@ -65,8 +65,10 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email)
+    public UserResponse getUserByEmail(String email) {
+        User user=userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return mapToResponse(user);
+        
     }
 }
