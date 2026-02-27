@@ -11,9 +11,11 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    User getUserById(Long id);
+    UserResponse getUserById(Long id);
     UserResponse getUserByEmail(String email);
-    User updateUser(Long id, User user);
+    UserResponse updateUser(Long id, UserRequest user);
 
     void deleteUser(Long id);
+
+	
 }

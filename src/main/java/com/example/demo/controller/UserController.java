@@ -42,8 +42,8 @@ public class UserController {
     
     //GET BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        User user = userService.getUserById(id);
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+        UserResponse user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
   //GET BY Email
@@ -54,8 +54,8 @@ public class UserController {
     }
     // UPDATE
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id,
-                           @RequestBody User user) {
+    public UserResponse updateUser(@PathVariable Long id,
+                           @RequestBody UserRequest user) {
         return userService.updateUser(id, user);
     }
 

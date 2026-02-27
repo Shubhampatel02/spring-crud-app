@@ -45,18 +45,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long id) {
-        return userRepository.findById(id)
+    public UserResponse getUserById(Long id) {
+    	
+        User user=userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        return mapToResponse(user);
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        User existingUser = getUserById(id);
-        existingUser.setName(user.getName());
-        existingUser.setEmail(user.getEmail());
-        existingUser.setAge(user.getAge());   
-        return userRepository.save(existingUser);
+    public UserResponse updateUser(Long id, UserRequest request) {
+
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        // 2️⃣ Update fields
+        existingUser.setName(request.getName());
+        existingUser.setEmail(request.getEmail());
+        existingUser.setAge(request.getAge());
+
+        // 3️⃣ Save updated entity
+        User updatedUser = userRepository.save(existingUser);
+
+        // 4️⃣ Return DTO
+        return mapToResponse(updatedUser);
     }
 
     @Override
