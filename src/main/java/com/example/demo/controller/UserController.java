@@ -40,13 +40,13 @@ public class UserController {
         return userService.getAllUsers();
     }
     
-    //GET BY ID
+    //READ BY ID
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         UserResponse user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
-  //GET BY Email
+    //GET BY Email
     @GetMapping("/email/{email}")
     public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
         UserResponse user = userService.getUserByEmail(email);
